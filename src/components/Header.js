@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = props => {
     return (
-        <header class="Pomodoro-header">
+        <header className="Pomodoro-header">
             <h1>{props.title}</h1>
         </header>
     );
