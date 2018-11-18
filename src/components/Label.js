@@ -6,7 +6,8 @@ const Label = props => {
         <div className="Label" id={props.title+'-label'}>
             <h3>{props.title + '-length'}</h3>
             <Adjuster title={props.title}
-               length={props.length}  />
+               length={props.length}  
+               handleClick={props.handleClick}/>
         </div>
     );
 }

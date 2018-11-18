@@ -6,10 +6,12 @@ const Controls = props => {
         <div className="Controls">
             <Label 
                 title="break"
-                length={props.length}/>
+                length={props.length}
+                handleClick={props.handleClick}/>
             <Label 
                 title="session"
-                length={props.length}/>
+                length={props.length}
+                handleClick={props.handleClick}/>
         </div>
     );
 }
