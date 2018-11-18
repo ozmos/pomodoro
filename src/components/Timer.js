@@ -7,7 +7,7 @@ const Timer = props => {
                 {props.label}
             </h3>
             <p className="time-left" id="time-left">
-                {props.time_left}
+                {props.currentTime}
             </p>
         </div>
     );

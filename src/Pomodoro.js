@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import './Pomodoro.css';
 import Header from './components/Header';
 import Controls from './components/Controls';
@@ -11,17 +12,16 @@ class Pomodoro extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      minutes: 25,
-      seconds: 0,
+      currentTime: moment.duration(25, 'minutes'),
       session_length: 25,
       break_length: 5,
+      timer: null,
       session: true, 
       started: false,
       paused: true
     };
     this.handleClick = this.handleClick.bind(this);
-    this.countdown = this.countdown.bind(this);
-    this.calculate = this.calculate.bind(this);
+    this.reduceTimer = this.reduceTimer.bind(this);
     this.pause = this.pause.bind(this);
     this.reset = this.reset.bind(this);
     this.startBreak = this.startBreak.bind(this);
@@ -54,7 +54,9 @@ class Pomodoro extends Component {
     this.state[dynamicKey] < 60 ?
     this.setState({
       [dynamicKey] : this.state[dynamicKey] + 1
-    }) : this.setState({[dynamicKey] : 60});
+    }) : this.setState({
+      [dynamicKey] : 60
+    });
   }
   decrement(len) {
     let dynamicKey = `${len}_length`;
@@ -62,7 +64,7 @@ class Pomodoro extends Component {
     this.setState({
       [dynamicKey] : this.state[dynamicKey] - 1
     }) : this.setState({ 
-      [dynamicKey] : 1
+      [dynamicKey] : 0
     });
   }
 
@@ -73,19 +75,32 @@ class Pomodoro extends Component {
   startSession() {
     //todo
     this.setState({
-      minutes: this.state.session_length,
-      seconds: 0,
+      currentTime: moment.duration(this.state.session_length, 'minutes')
     });
-    this.countdown(this.state.session_length + (this.state.seconds / 60));
+    this.setState({
+      timer: setInterval(this.reduceTimer, 1000)
+    });
     this.setState({
       session: true
-    })
+    });
+  }
+
+  reduceTimer() {
+    if (this.state.session) {
+      const newTime = this.state.currentTime;
+      newTime.subtract(1, 'second');
+
+      this.setState({
+        currentTime: newTime
+      });
+    }
   }
   handleClick(event) {
     const clicked = event.target.innerText;
     switch(clicked) {
       case 'play':
-      this.state.started ? this.countdown(this.state.minutes + (this.state.seconds / 60)) : this.checkSession();
+      //todo introduce pause
+      this.state.started ? this.pause() : this.checkSession();
       this.setState({
         paused: false
       });
@@ -104,65 +119,37 @@ class Pomodoro extends Component {
     }
   }
   startBreak() {
-    this.countdown(this.state.break_length);
     this.setState({
+      currentTime: moment.duration(this.state.break_length)
+    });
+    this.setState({
+      timer: setInterval(this.reduceTimer, 1000),
       session: false
     });
   }
 
   reset() {
-    clearInterval(this.interval);
+    clearInterval(this.state.timer, 1000);
     this.setState({
-       minutes: 25,
-      seconds: 0,
+      currentTime: moment.duration(25, 'minutes'),
       session_length: 25,
       break_length: 5,
+      timer: null,
       session: true, 
+      started: false,
       paused: true
     });
   }  
   pause() {
-    clearInterval(this.interval);
+    clearInterval(this.state.timer, 1000);
   }
-  countdown(num) {
-    let stopTime = new Date;
-      stopTime = stopTime.getTime() + (num * 60 * 1000);
-    
-    this.interval = setInterval(this.calculate, 1000, stopTime);
-       
-  }
- calculate(stopTime) {
-      console.log('started');
-      console.log(stopTime);
-      let minutes, seconds;
-      let startTime = new Date;
-      startTime = startTime.getTime();
-      let duration = parseInt((stopTime - startTime) / 1000);
-      
-      if (duration >= 0) {
-        minutes = parseInt(duration / 60);
-        duration = (duration % 60);
-        seconds = parseInt(duration);
-        console.log(minutes);
-        console.log(duration);
-        console.log(seconds);
-        this.setState({
-          minutes: minutes,
-          seconds: seconds
-        });
-      } else {
-        clearInterval(this.interval);
-        this.startBreak();
-      } 
-    } 
-
-  render() {
+  
+render() {
     const lengths = {
       break: this.state.break_length,
       session: this.state.session_length
     };
-
-    const time_left = `${('0' + this.state.minutes).slice(-2)} : ${('0' + this.state.seconds).slice(-2)}`;
+    const currentTime = `${('0' + this.state.currentTime.get('minutes')).slice(-2)} : ${('0' + this.state.currentTime.get('seconds')).slice(-2)} `
     return (
       <div className="Pomodoro">
         <header className="Pomodoro-header">
@@ -171,7 +158,7 @@ class Pomodoro extends Component {
         <main className="main">
           <Controls
             length={lengths} handleClick={this.adjustTime}/>
-          <Timer label={this.state.session ? "session" : "break"} time_left={time_left} />
+          <Timer label={this.state.session ? "session" : "break"} currentTime={currentTime} />
           <PlayPause handleClick={this.handleClick} paused={this.state.paused}/>
         </main>
       </div>
