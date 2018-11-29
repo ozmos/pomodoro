@@ -7,7 +7,8 @@ const Label = props => {
             <h3>{props.title + '-length'}</h3>
             <Adjuster title={props.title}
                length={props.length}  
-               handleClick={props.handleClick}/>
+               increment={props.increment}
+               decrement={props.decrement}/>
         </div>
     );
 }

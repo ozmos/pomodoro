@@ -1,3 +1,4 @@
+//todo add delay back in ??
 import React, { Component } from 'react';
 import moment from 'moment';
 import './Pomodoro.css';
@@ -7,7 +8,9 @@ import './styles/Controls.css';
 import './styles/Label.css';
 import Timer from './components/Timer';
 import PlayPause from './components/PlayPause';
+var momentDurationFormatSetup = require("moment-duration-format");
 
+momentDurationFormatSetup(moment);
 class Pomodoro extends Component {
   constructor (props) {
     super(props);
@@ -15,141 +18,155 @@ class Pomodoro extends Component {
       currentTime: moment.duration(25, 'minutes'),
       session_length: 25,
       break_length: 5,
-      timer: null,
       session: true, 
       started: false,
       paused: true
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.countDown = this.countDown.bind(this);
     this.reduceTimer = this.reduceTimer.bind(this);
     this.pause = this.pause.bind(this);
     this.reset = this.reset.bind(this);
     this.startBreak = this.startBreak.bind(this);
     this.checkSession = this.checkSession.bind(this);
     this.startSession = this.startSession.bind(this);
-    this.adjustTime = this.adjustTime.bind(this);
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-  }
-  adjustTime(event) {
-    switch(event.target.id) {
-      case 'break-increment':
-      this.increment('break');
-      break;
-      case 'break-decrement':
-      this.decrement('break');
-      break;
-      case 'session-increment':
-      this.increment('session');
-      break;
-      case 'session-decrement':
-      this.decrement('session');
-      break;
-      default:
-      return null;
-    };
-  }
-  increment(len) {
-    let dynamicKey = `${len}_length`;
-    this.state[dynamicKey] < 60 ?
-    this.setState({
-      [dynamicKey] : this.state[dynamicKey] + 1
-    }) : this.setState({
-      [dynamicKey] : 60
-    });
-  }
-  decrement(len) {
-    let dynamicKey = `${len}_length`;
-    this.state[dynamicKey] > 1 ?
-    this.setState({
-      [dynamicKey] : this.state[dynamicKey] - 1
-    }) : this.setState({ 
-      [dynamicKey] : 0
-    });
+    this.incrementSession = this.incrementSession.bind(this);
+    this.decrementSession = this.decrementSession.bind(this);
+    this.incrementBreak = this.incrementBreak.bind(this);
+    this.decrementBreak = this.decrementBreak.bind(this);
+   // this.stopTime = this.stopTime.bind(this); //does this do anything now???
+    this.unpause = this.unpause.bind(this);
   }
 
+  incrementSession() {
+    this.state.session_length < 60 
+      ? this.setState({
+        session_length : this.state.session_length + 1,
+        currentTime: this.state.currentTime.add(1, 'minute')
+      })
+      : this.setState({
+        session_length : 60,
+        currentTime : moment.duration(60, 'minutes')
+      })
+  } 
+  //todo make new decrementSession and increment/decrementBreak functions and pass to components
+  decrementSession() {
+    this.state.session_length > 1 
+      ? this.setState({
+        session_length : this.state.session_length - 1,
+        currentTime: this.state.currentTime.subtract(1, 'minute')
+      })
+      : this.setState({
+        session_length : 1,
+        currentTime : moment.duration(1, 'minute')
+      })
+  }
+
+  incrementBreak() {
+    this.state.break_length < 60
+      ? this.setState({
+        break_length : this.state.break_length + 1
+      })
+      : this.setState({
+        break_length: 60
+      })
+  }
+   decrementBreak () {
+    this.state.break_length > 1 
+      ? this.setState({
+        break_length : this.state.break_length - 1
+      })
+      : this.setState({
+        break_length : 1
+      })
+  }
 
   checkSession() {
     this.state.session ? this.startSession() : this.startBreak();
   }
+
   startSession() {
-    //todo
     this.setState({
       currentTime: moment.duration(this.state.session_length, 'minutes')
     });
+    this.countDown();
     this.setState({
-      timer: setInterval(this.reduceTimer, 1000)
-    });
-    this.setState({
-      session: true
+      session: true,
+      started: true,
     });
   }
 
+  countDown() {
+    //this.reduceTimer()
+    this.timer = setInterval(this.reduceTimer, 1000);
+  }
+
   reduceTimer() {
-    if (this.state.session) {
+    const currentTime = this.state.currentTime;
+    if (currentTime.get('seconds') > 0 || currentTime.get('minutes') > 0 || currentTime.get('hours') > 0) {
       const newTime = this.state.currentTime;
       newTime.subtract(1, 'second');
 
       this.setState({
         currentTime: newTime
       });
-    }
-  }
-  handleClick(event) {
-    const clicked = event.target.innerText;
-    switch(clicked) {
-      case 'play':
-      //todo introduce pause
-      this.state.started ? this.pause() : this.checkSession();
+    } else if (this.state.session) {
       this.setState({
-        paused: false
+        session: false
       });
-      break;
-      case 'pause':
-      this.pause();
+      this.checkSession();
+    } else if (!this.state.session) {
       this.setState({
-      paused: true
-    });
-      break;
-      case 'reset': 
-      this.reset();
-      break;
-      default :
-      console.log('you clicked something');
+        session: true
+      });
+      this.checkSession();
     }
   }
-  startBreak() {
+
+    startBreak() {
+    clearInterval(this.timer, 1000);
     this.setState({
-      currentTime: moment.duration(this.state.break_length)
+      currentTime: moment.duration(this.state.break_length, 'minutes')
     });
-    this.setState({
-      timer: setInterval(this.reduceTimer, 1000),
-      session: false
-    });
+    this.countDown();
   }
 
   reset() {
-    clearInterval(this.state.timer, 1000);
+    clearInterval(this.timer, 1000);
     this.setState({
       currentTime: moment.duration(25, 'minutes'),
       session_length: 25,
       break_length: 5,
-      timer: null,
       session: true, 
       started: false,
       paused: true
     });
   }  
+
   pause() {
-    clearInterval(this.state.timer, 1000);
+    clearInterval(this.timer, 1000);
+    this.setState({
+      paused: true
+    });
   }
+
+  unpause() {
+    this.setState({
+      paused: false
+    });
+  }
+
+ /* stopTime() {
+    clearInterval(this.timer, 1000);
+  }*/
   
 render() {
     const lengths = {
       break: this.state.break_length,
       session: this.state.session_length
     };
-    const currentTime = `${('0' + this.state.currentTime.get('minutes')).slice(-2)} : ${('0' + this.state.currentTime.get('seconds')).slice(-2)} `
+    
+    const currentTime = `${('00:' +this.state.currentTime.format('mm:ss')).slice(-5)}`;
+
     return (
       <div className="Pomodoro">
         <header className="Pomodoro-header">
@@ -157,9 +174,23 @@ render() {
         </header>
         <main className="main">
           <Controls
-            length={lengths} handleClick={this.adjustTime}/>
+            length={lengths} 
+            incrementSession={this.incrementSession}
+            decrementSession={this.decrementSession}
+            incrementBreak={this.incrementBreak} 
+            decrementBreak={this.decrementBreak}
+          />
           <Timer label={this.state.session ? "session" : "break"} currentTime={currentTime} />
-          <PlayPause handleClick={this.handleClick} paused={this.state.paused}/>
+          <PlayPause 
+            countDown={this.countDown}
+            checkSession={this.checkSession}
+            pause={this.pause}
+            reset={this.reset}
+            unpause={this.unpause}
+            paused={this.state.paused}
+            started={this.state.started}
+            currentTime={this.state.currentTime}
+          />
         </main>
       </div>
     );
