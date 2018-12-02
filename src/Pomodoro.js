@@ -1,4 +1,3 @@
-//todo add delay back in ??
 import React, { Component } from 'react';
 import moment from 'moment';
 import './Pomodoro.css';
@@ -8,6 +7,9 @@ import './styles/Controls.css';
 import './styles/Label.css';
 import Timer from './components/Timer';
 import PlayPause from './components/PlayPause';
+import soundfile from './audio/080_simple-sevenths-epiano.mp3';
+import  Beep  from './components/Beep';
+
 var momentDurationFormatSetup = require("moment-duration-format");
 
 momentDurationFormatSetup(moment);
@@ -33,8 +35,19 @@ class Pomodoro extends Component {
     this.decrementSession = this.decrementSession.bind(this);
     this.incrementBreak = this.incrementBreak.bind(this);
     this.decrementBreak = this.decrementBreak.bind(this);
-   // this.stopTime = this.stopTime.bind(this); //does this do anything now???
     this.unpause = this.unpause.bind(this);
+    this.playAlarm = this.playAlarm.bind(this);
+    this.stopAlarm = this.stopAlarm.bind(this);
+  }
+
+  playAlarm () {
+      document.getElementById("beep").play()
+  }
+
+  stopAlarm () {
+    const alarm = document.getElementById("beep");
+    alarm.pause();
+    alarm.currentTime = 0;
   }
 
   incrementSession() {
@@ -86,7 +99,7 @@ class Pomodoro extends Component {
 
   startSession() {
     this.setState({
-      currentTime: moment.duration(this.state.session_length, 'minutes')
+      currentTime: moment.duration(this.state.session_length, 'minutes'),
     });
     this.countDown();
     this.setState({
@@ -110,13 +123,15 @@ class Pomodoro extends Component {
         currentTime: newTime
       });
     } else if (this.state.session) {
+      this.playAlarm();
       this.setState({
-        session: false
+        session: false,
       });
       this.checkSession();
     } else if (!this.state.session) {
+      this.playAlarm();
       this.setState({
-        session: true
+        session: true,
       });
       this.checkSession();
     }
@@ -125,13 +140,14 @@ class Pomodoro extends Component {
     startBreak() {
     clearInterval(this.timer, 1000);
     this.setState({
-      currentTime: moment.duration(this.state.break_length, 'minutes')
+      currentTime: moment.duration(this.state.break_length, 'minutes'),
     });
     this.countDown();
   }
 
   reset() {
     clearInterval(this.timer, 1000);
+    this.stopAlarm();
     this.setState({
       currentTime: moment.duration(25, 'minutes'),
       session_length: 25,
@@ -154,10 +170,6 @@ class Pomodoro extends Component {
       paused: false
     });
   }
-
- /* stopTime() {
-    clearInterval(this.timer, 1000);
-  }*/
   
 render() {
     const lengths = {
@@ -191,6 +203,7 @@ render() {
             started={this.state.started}
             currentTime={this.state.currentTime}
           />
+          <Beep url={soundfile}/>
         </main>
       </div>
     );
