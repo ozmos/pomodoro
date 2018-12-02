@@ -27,19 +27,19 @@ class Adjuster extends React.Component {
 render() {
     return (
         <div className="Adjuster-container">
-            <button 
+            <p 
             className="Adjuster-button" 
             id={this.props.title+'-increment'}
             onClick={this.handleClick}>
-                Up
-            </button>
+                <i class="arrow up"></i>
+            </p>
             <span id={this.props.title+'-length'}>{this.props.length[this.props.title]}</span>
-            <button 
+            <p 
             className="Adjuster-button" 
             id={this.props.title+'-decrement'}
             onClick={this.handleClick}>
-                Down
-            </button>
+                <i class="arrow down"></i>
+            </p>
         </div>
     );
 }

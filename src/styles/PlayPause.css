@@ -1,0 +1,23 @@
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_shapes_triangle-right */
+
+.triangle-right {
+    margin: auto;
+    background: transparent;
+    color: transparent;
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-left: 35px solid white;
+    border-right: 0px solid transparent;
+    border-bottom: 17px solid transparent;
+}
+
+.pause-button {
+    margin: auto;
+    width: 35px;
+    height: 35px;
+    border-color: white;
+    border-style: double;
+    border-width: 0px 35px 0px 0px;
+    transform: translateX(-25%);
+}

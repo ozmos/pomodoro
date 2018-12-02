@@ -9,7 +9,8 @@ import Timer from './components/Timer';
 import PlayPause from './components/PlayPause';
 import soundfile from './audio/080_simple-sevenths-epiano.mp3';
 import  Beep  from './components/Beep';
-
+import './styles/Timer.css';
+import './styles/PlayPause.css';
 var momentDurationFormatSetup = require("moment-duration-format");
 
 momentDurationFormatSetup(moment);
@@ -182,16 +183,9 @@ render() {
     return (
       <div className="Pomodoro">
         <header className="Pomodoro-header">
-          <Header title="React Pomodoro timer"/> 
+          <Header title="Yo yo Pomodoro"/> 
         </header>
         <main className="main">
-          <Controls
-            length={lengths} 
-            incrementSession={this.incrementSession}
-            decrementSession={this.decrementSession}
-            incrementBreak={this.incrementBreak} 
-            decrementBreak={this.decrementBreak}
-          />
           <Timer label={this.state.session ? "session" : "break"} currentTime={currentTime} />
           <PlayPause 
             countDown={this.countDown}
@@ -202,6 +196,13 @@ render() {
             paused={this.state.paused}
             started={this.state.started}
             currentTime={this.state.currentTime}
+          />
+          <Controls
+            length={lengths} 
+            incrementSession={this.incrementSession}
+            decrementSession={this.decrementSession}
+            incrementBreak={this.incrementBreak} 
+            decrementBreak={this.decrementBreak}
           />
           <Beep url={soundfile}/>
         </main>

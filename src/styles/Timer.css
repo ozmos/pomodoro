@@ -1,0 +1,9 @@
+.Timer {
+    margin: 1rem auto
+}
+
+.time-left {
+    font-size: 6rem;
+    line-height: 1;
+    margin: 0;
+}

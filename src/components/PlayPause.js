@@ -6,7 +6,7 @@ class PlayPause extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(event) {
-        const clicked = event.target.innerText;
+        const clicked = event.target.id;
         switch(clicked) {
         case 'play':
         //todo introduce pause
@@ -26,8 +26,9 @@ class PlayPause extends React.Component {
     render () {
         return (
             <div className="Play-pause-container">
-                <button className="start_stop" id="start_stop" onClick={this.handleClick}>{this.props.paused ? 'play' : 'pause'}</button>
-                <button className="reset" id="reset" onClick={this.handleClick}>reset</button>
+                <div className="start_stop" id="start_stop" onClick={this.handleClick}>{this.props.paused 
+                    ? <div className="triangle-right" id="play"></div> : <div className="pause-button" id="pause"></div>}</div>
+                <p className="reset" id="reset" onClick={this.handleClick}>reset</p>
             </div>
         );
     }
