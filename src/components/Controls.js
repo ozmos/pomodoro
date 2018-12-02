@@ -7,11 +7,14 @@ const Controls = props => {
             <Label 
                 title="break"
                 length={props.length}
-                handleClick={props.handleClick}/>
+                increment={props.incrementBreak}
+                decrement={props.decrementBreak}/>
             <Label 
                 title="session"
                 length={props.length}
-                handleClick={props.handleClick}/>
+                increment={props.incrementSession}
+                decrement={props.decrementSession}
+                />
         </div>
     );
 }
