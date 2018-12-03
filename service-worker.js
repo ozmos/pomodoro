@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ozmos/pomodoro/precache-manifest.8b0a75bdd101033175b961dc5d5fa196.js"
+  "/pomodoro/precache-manifest.f134b48560d331e53682e7fa0dadbc65.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/ozmos/pomodoro/index.html", {
+workbox.routing.registerNavigationRoute("/pomodoro/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

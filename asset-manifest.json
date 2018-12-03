@@ -1,14 +1,14 @@
 {
-  "main.css": "/ozmos/pomodoro/static/css/main.8b7bbcf0.chunk.css",
-  "main.js": "/ozmos/pomodoro/static/js/main.113865d7.chunk.js",
-  "main.js.map": "/ozmos/pomodoro/static/js/main.113865d7.chunk.js.map",
-  "static/js/1.abe4bbaf.chunk.js": "/ozmos/pomodoro/static/js/1.abe4bbaf.chunk.js",
-  "static/js/1.abe4bbaf.chunk.js.map": "/ozmos/pomodoro/static/js/1.abe4bbaf.chunk.js.map",
-  "runtime~main.js": "/ozmos/pomodoro/static/js/runtime~main.a544aaea.js",
-  "runtime~main.js.map": "/ozmos/pomodoro/static/js/runtime~main.a544aaea.js.map",
-  "static/media/080_simple-sevenths-epiano.mp3": "/ozmos/pomodoro/static/media/080_simple-sevenths-epiano.cb1f1e4f.mp3",
-  "static/css/main.8b7bbcf0.chunk.css.map": "/ozmos/pomodoro/static/css/main.8b7bbcf0.chunk.css.map",
-  "index.html": "/ozmos/pomodoro/index.html",
-  "precache-manifest.8b0a75bdd101033175b961dc5d5fa196.js": "/ozmos/pomodoro/precache-manifest.8b0a75bdd101033175b961dc5d5fa196.js",
-  "service-worker.js": "/ozmos/pomodoro/service-worker.js"
+  "main.css": "/pomodoro/static/css/main.821d12ec.chunk.css",
+  "main.js": "/pomodoro/static/js/main.d0f9d09d.chunk.js",
+  "main.js.map": "/pomodoro/static/js/main.d0f9d09d.chunk.js.map",
+  "static/js/1.abe4bbaf.chunk.js": "/pomodoro/static/js/1.abe4bbaf.chunk.js",
+  "static/js/1.abe4bbaf.chunk.js.map": "/pomodoro/static/js/1.abe4bbaf.chunk.js.map",
+  "runtime~main.js": "/pomodoro/static/js/runtime~main.a702e67f.js",
+  "runtime~main.js.map": "/pomodoro/static/js/runtime~main.a702e67f.js.map",
+  "static/media/080_simple-sevenths-epiano.mp3": "/pomodoro/static/media/080_simple-sevenths-epiano.cb1f1e4f.mp3",
+  "static/css/main.821d12ec.chunk.css.map": "/pomodoro/static/css/main.821d12ec.chunk.css.map",
+  "index.html": "/pomodoro/index.html",
+  "precache-manifest.f134b48560d331e53682e7fa0dadbc65.js": "/pomodoro/precache-manifest.f134b48560d331e53682e7fa0dadbc65.js",
+  "service-worker.js": "/pomodoro/service-worker.js"
 }
