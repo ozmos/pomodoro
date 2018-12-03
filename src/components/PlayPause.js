@@ -25,9 +25,8 @@ class PlayPause extends React.Component {
     }
     render () {
         return (
-            <div className="Play-pause-container">
-                <div className="start_stop" id="start_stop" onClick={this.handleClick}>{this.props.paused 
-                    ? <div className="triangle-right" id="play"></div> : <div className="pause-button" id="pause"></div>}</div>
+            <div className="start_stop" id="start_stop" onClick={this.handleClick}>{this.props.paused 
+                ? <div className="triangle-right" id="play"></div> : <div className="pause-button" id="pause"></div>}
                 <p className="reset" id="reset" onClick={this.handleClick}>reset</p>
             </div>
         );
@@ -35,3 +34,5 @@ class PlayPause extends React.Component {
 };
 
 export default PlayPause;
+
+ 

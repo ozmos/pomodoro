@@ -11,9 +11,9 @@ import soundfile from './audio/080_simple-sevenths-epiano.mp3';
 import  Beep  from './components/Beep';
 import './styles/Timer.css';
 import './styles/PlayPause.css';
-var momentDurationFormatSetup = require("moment-duration-format");
+//var momentDurationFormatSetup = require("moment-duration-format");
 
-momentDurationFormatSetup(moment);
+//momentDurationFormatSetup(moment);
 class Pomodoro extends Component {
   constructor (props) {
     super(props);
@@ -110,7 +110,6 @@ class Pomodoro extends Component {
   }
 
   countDown() {
-    //this.reduceTimer()
     this.timer = setInterval(this.reduceTimer, 1000);
   }
 
@@ -128,12 +127,14 @@ class Pomodoro extends Component {
       this.setState({
         session: false,
       });
+      clearInterval(this.timer, 1000);
       this.checkSession();
     } else if (!this.state.session) {
       this.playAlarm();
       this.setState({
         session: true,
       });
+      clearInterval(this.timer, 1000);
       this.checkSession();
     }
   }
@@ -178,7 +179,14 @@ render() {
       session: this.state.session_length
     };
     
-    const currentTime = `${('00:' +this.state.currentTime.format('mm:ss')).slice(-5)}`;
+    const formatTime = (time) => {
+      return time.get('hours') 
+        ? `${(time.get('hours') * 60) + ':' + ('0' + time.get('seconds')).slice(-2)}`
+        : `${('0' + time.get('minutes')).slice(-2) + ':' + ('0' + time.get('seconds')).slice(-2)}`;
+         
+    };
+
+    const currentTime = formatTime(this.state.currentTime);
 
     return (
       <div className="Pomodoro">
