@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/ozmos/pomodoro/static/js/runtime~main.a544aaea.js"
   },
   {
-    "revision": "71ef4967b410f5703463",
-    "url": "/ozmos/pomodoro/static/js/main.71ef4967.chunk.js"
+    "revision": "113865d79129e18767c3",
+    "url": "/ozmos/pomodoro/static/js/main.113865d7.chunk.js"
   },
   {
-    "revision": "624cdec2563e58508af7",
-    "url": "/ozmos/pomodoro/static/js/1.624cdec2.chunk.js"
+    "revision": "abe4bbafde4e568c4dcc",
+    "url": "/ozmos/pomodoro/static/js/1.abe4bbaf.chunk.js"
   },
   {
-    "revision": "71ef4967b410f5703463",
-    "url": "/ozmos/pomodoro/static/css/main.821d12ec.chunk.css"
+    "revision": "113865d79129e18767c3",
+    "url": "/ozmos/pomodoro/static/css/main.8b7bbcf0.chunk.css"
   },
   {
-    "revision": "c681082f0800c762b72b15cdd6d625e6",
+    "revision": "42a862b6a1729bfd9d7b0d0096881eb8",
     "url": "/ozmos/pomodoro/index.html"
   }
 ];

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ozmos/pomodoro/precache-manifest.b156e9d089fecf6c0b1850d903abe8c8.js"
+  "/ozmos/pomodoro/precache-manifest.8b0a75bdd101033175b961dc5d5fa196.js"
 );
 
 workbox.clientsClaim();
