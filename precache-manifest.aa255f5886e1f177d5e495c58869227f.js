@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/pomodoro/static/js/runtime~main.a702e67f.js"
   },
   {
-    "revision": "d0f9d09ddab4d9bdd365",
-    "url": "/pomodoro/static/js/main.d0f9d09d.chunk.js"
+    "revision": "0a259e4e81b970bdc4db",
+    "url": "/pomodoro/static/js/main.0a259e4e.chunk.js"
   },
   {
     "revision": "abe4bbafde4e568c4dcc",
     "url": "/pomodoro/static/js/1.abe4bbaf.chunk.js"
   },
   {
-    "revision": "d0f9d09ddab4d9bdd365",
-    "url": "/pomodoro/static/css/main.821d12ec.chunk.css"
+    "revision": "0a259e4e81b970bdc4db",
+    "url": "/pomodoro/static/css/main.0e818dda.chunk.css"
   },
   {
-    "revision": "49b83dafe2636eaadb224f6b7a4cf101",
+    "revision": "361abb8ec6c87d3ed649e4a1d4f5218f",
     "url": "/pomodoro/index.html"
   }
 ];
