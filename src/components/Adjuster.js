@@ -31,14 +31,14 @@ render() {
             className="Adjuster-button" 
             id={this.props.title+'-increment'}
             onClick={this.handleClick}>
-                <i class="arrow up"></i>
+                <i className="arrow up"></i>
             </p>
             <span id={this.props.title+'-length'}>{this.props.length[this.props.title]}</span>
             <p 
             className="Adjuster-button" 
             id={this.props.title+'-decrement'}
             onClick={this.handleClick}>
-                <i class="arrow down"></i>
+                <i className="arrow down"></i>
             </p>
         </div>
     );

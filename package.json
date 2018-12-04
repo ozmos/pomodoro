@@ -2,7 +2,7 @@
     "name": "pomodoro",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://github.com/ozmos/pomodoro",
+    "homepage": "http://ozmos.github.io/pomodoro",
     "dependencies": {
         "moment": "^2.22.2",
         "react": "^16.6.1",

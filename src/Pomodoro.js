@@ -40,9 +40,13 @@ class Pomodoro extends Component {
     this.playAlarm = this.playAlarm.bind(this);
     this.stopAlarm = this.stopAlarm.bind(this);
   }
-
+ 
   playAlarm () {
-      document.getElementById("beep").play()
+    const currentTime = this.state.currentTime;
+    const totalTime = currentTime.get('hours') + currentTime.get('minutes'); 
+    if (totalTime === 0 && currentTime.get('seconds') === 1) {
+      document.getElementById("beep").play();
+    }
   }
 
   stopAlarm () {
@@ -114,6 +118,7 @@ class Pomodoro extends Component {
   }
 
   reduceTimer() {
+    this.playAlarm();
     const currentTime = this.state.currentTime;
     if (currentTime.get('seconds') > 0 || currentTime.get('minutes') > 0 || currentTime.get('hours') > 0) {
       const newTime = this.state.currentTime;
@@ -123,14 +128,12 @@ class Pomodoro extends Component {
         currentTime: newTime
       });
     } else if (this.state.session) {
-      this.playAlarm();
       this.setState({
         session: false,
       });
       clearInterval(this.timer, 1000);
       this.checkSession();
     } else if (!this.state.session) {
-      this.playAlarm();
       this.setState({
         session: true,
       });
