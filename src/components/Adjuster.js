@@ -28,17 +28,15 @@ render() {
     return (
         <div className="Adjuster-container">
             <p 
-            className="Adjuster-button" 
+            className="Adjuster-button arrow up" 
             id={this.props.title+'-increment'}
             onClick={this.handleClick}>
-                <i className="arrow up"></i>
             </p>
-            <span id={this.props.title+'-length'}>{this.props.length[this.props.title]}</span>
+            <p className={this.props.title+'-length-display adjuster-display'}id={this.props.title+'-length'}>{this.props.length[this.props.title]}</p>
             <p 
-            className="Adjuster-button" 
+            className="Adjuster-button arrow down" 
             id={this.props.title+'-decrement'}
             onClick={this.handleClick}>
-                <i className="arrow down"></i>
             </p>
         </div>
     );

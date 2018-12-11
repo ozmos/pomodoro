@@ -11,9 +11,7 @@ import soundfile from './audio/080_simple-sevenths-epiano.mp3';
 import  Beep  from './components/Beep';
 import './styles/Timer.css';
 import './styles/PlayPause.css';
-//var momentDurationFormatSetup = require("moment-duration-format");
 
-//momentDurationFormatSetup(moment);
 class Pomodoro extends Component {
   constructor (props) {
     super(props);
