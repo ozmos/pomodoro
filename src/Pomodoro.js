@@ -8,6 +8,7 @@ import './styles/Label.css';
 import Timer from './components/Timer';
 import PlayPause from './components/PlayPause';
 import soundfile from './audio/080_simple-sevenths-epiano.mp3';
+import bell from './audio/doorbell.mp3';
 import  Beep  from './components/Beep';
 import './styles/Timer.css';
 import './styles/PlayPause.css';
@@ -42,13 +43,15 @@ class Pomodoro extends Component {
   playAlarm () {
     const currentTime = this.state.currentTime;
     const totalTime = currentTime.get('hours') + currentTime.get('minutes'); 
+    const id = this.state.session ? "beep1" : "beep2";
     if (totalTime === 0 && currentTime.get('seconds') === 1) {
-      document.getElementById("beep").play();
+      document.getElementById(id).play();
     }
   }
 
   stopAlarm () {
-    const alarm = document.getElementById("beep");
+    const id = this.state.session ? "beep1" : "beep2";
+    const alarm = document.getElementById(id);
     alarm.pause();
     alarm.currentTime = 0;
   }
@@ -213,7 +216,10 @@ render() {
             incrementBreak={this.incrementBreak} 
             decrementBreak={this.decrementBreak}
           />
-          <Beep url={soundfile}/>
+          <Beep 
+            url1={soundfile}
+            url2={bell}
+            />
         </main>
       </div>
     );

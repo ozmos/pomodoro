@@ -3,6 +3,7 @@
 }
 
 .time-left {
+    font-family: 'Roboto Mono', monospace;
     font-size: 6rem;
     line-height: 1;
     margin: 0;

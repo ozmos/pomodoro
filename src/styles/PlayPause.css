@@ -1,7 +1,13 @@
+.start_stop {
+    padding: 1.4rem;
+    padding-bottom: 0.5rem;
+}
+
+
 /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_shapes_triangle-right */
 
 .triangle-right {
-    margin: auto;
+    margin: 0 auto;
     background: transparent;
     color: transparent;
     width: 0;
@@ -13,7 +19,7 @@
 }
 
 .pause-button {
-    margin: auto;
+    margin: 0 auto;
     width: 35px;
     height: 35px;
     border-color: white;
