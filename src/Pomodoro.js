@@ -3,6 +3,7 @@ import moment from 'moment';
 import './Pomodoro.css';
 import Header from './components/Header';
 import Controls from './components/Controls';
+import Footer from './components/Footer';
 import './styles/Controls.css';
 import './styles/Label.css';
 import Timer from './components/Timer';
@@ -221,6 +222,7 @@ render() {
             url2={bell}
             />
         </main>
+        <Footer author={"Osamu Morozumi"} />
       </div>
     );
   }
